@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class Livro {
 
+    private int id;
     private String descricao;
     private String ISBN;
     private String edicao;
@@ -20,6 +21,21 @@ public class Livro {
         this.autores = new ArrayList<>();
     }
 
+    public Livro(int id, String descricao, String ISBN, String edicao) {
+        this.id = id;
+        this.descricao = descricao;
+        this.ISBN = ISBN;
+        this.edicao = edicao;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getDescricao() {
         return descricao;
     }

@@ -9,10 +9,21 @@ public class CPF {
 
     private String valor; // sem pontos, apenas digitos
 
+    public CPF() {
+    }
+
     public CPF(String valor) {
         this.valor = valor;
     }
 
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+    
     public String valor() {
         return valor;
     }
@@ -36,5 +47,9 @@ public class CPF {
     public boolean isValid(){
         return this.valor.length()==11;
     }
-
+    
+      @Override
+    public String toString() {
+        return  valor ;
+    }
 }

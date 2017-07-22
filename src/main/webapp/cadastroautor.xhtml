@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="template.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <h:form>
+                    <h:messages layout="table" class="erro"/>
+                    <label class="col-md-4 control-label" for="name">Nome</label>
+                    <h:inputText value="#{controllerAutor.autor.nome}" 
+                                 class="form-control input-md" 
+                                 id="nome"/>
+                    <label class="col-md-4 control-label" for="cpf">CPF</label>
+                    <h:inputText value="#{controllerAutor.autor.cpf}" 
+                                 class="form-control input-md" 
+                                 converter="converter.CpfConverter" 
+                                 maxlength="11" 
+                                 id="cpf"/>
+                    <label class="col-md-4 control-label" for="email">Email</label>
+                    <h:inputText value="#{controllerAutor.autor.email}" 
+                                 class="form-control input-md" 
+                                 />
+                    <h:commandButton value="salvar" 
+                                     action="#{controllerAutor.salvarAutor}"
+                                     rendered="#{not controllerAutor.editando}"/>
+                    <h:commandButton value="atualizar" 
+                                     action="#{controllerAutor.atualizar()}" 
+                                     rendered="#{controllerAutor.editando}"/>
+
+
+                    <h:dataTable var="autor" value="#{controllerAutor.todosOsAutores}" styleClass="table table-striped">
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            <h:outputText value="#{autor.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Cpf</f:facet>
+                            <h:outputText value="#{autor.cpf}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Nome</f:facet>
+                            <h:outputText value="#{autor.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Remover</f:facet>
+                            <h:commandButton value="remover" 
+                                             action="#{controllerAutor.removerAutor(autor)}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Editar</f:facet>
+                            <h:commandButton value="editar" 
+                                             action="#{controllerAutor.editarAutor(autor)}" />
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>
+

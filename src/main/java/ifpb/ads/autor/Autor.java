@@ -7,11 +7,19 @@ package ifpb.ads.autor;
  */
 public class Autor {
 
+    private int id;
     private String nome;
     private String email;
-    private CPF cpf;
+    private CPF cpf = new CPF();
 
     public Autor() {
+    }
+
+    public Autor(int id, String nome, String email, String cpf) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.cpf.setValor(cpf);
     }
 
     public String getNome() {
@@ -38,4 +46,13 @@ public class Autor {
         this.email = email;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 }

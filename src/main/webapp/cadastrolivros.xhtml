@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="template.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <h:form>
+                    <h:messages layout="table" class="erro"/>
+                    <label class="col-md-4 control-label" for="isbn">ISBN</label>
+                    <h:inputText value="#{controllerLivro.livro.ISBN}" 
+                                 class="form-control input-md" 
+                                 id="isbn"
+                                 />
+                    <label class="col-md-4 control-label" for="descrição">Descricao</label>
+                    <h:inputText value="#{controllerLivro.livro.descricao}" 
+                                 class="form-control input-md" 
+                                 id="descricao"/>
+                    <label class="col-md-4 control-label" for="edicao">Edição</label>
+                    <h:inputText value="#{controllerLivro.livro.edicao}" 
+                                 class="form-control input-md" 
+                                 id="edicao"
+                                 />
+                    <h:dataTable var="autor" value="#{controllerAutor.todosOsAutores}" styleClass="table table-striped">
+                        <h:column>
+                            <f:facet name="header">ISBN</f:facet>
+                            <h:outputText value="#{autor.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Adicionar</f:facet>
+                            <h:commandButton value="Adicionar" 
+                                             action="#{controllerLivro.addAutor(autor)}" />
+                        </h:column>   
+                    </h:dataTable>
+                    <h:commandButton value="salvar" 
+                                     action="#{[controllerLivro.salvarLivro(),controllerLivro.salvarLivro()]}"
+                                     rendered="#{not controllerLivro.editando}"/>
+                    <h:commandButton value="atualizar" 
+                                     action="#{controllerLivro.atualizar()}" 
+                                     rendered="#{controllerLivro.editando}"/>
+
+
+                    <h:dataTable var="livro" value="#{controllerLivro.todosOsLivros}" styleClass="table table-striped">
+                        <h:column>
+                            <f:facet name="header">ISBN</f:facet>
+                            <h:outputText value="#{livro.ISBN}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Edição</f:facet>
+                            <h:outputText value="#{livro.edicao}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Descrição</f:facet>
+                            <h:outputText value="#{livro.descricao}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Remover</f:facet>
+                            <h:commandButton value="remover" 
+                                             action="#{controllerLivro.removerLivro(livro)}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Editar</f:facet>
+                            <h:commandButton value="editar" 
+                                             action="#{controllerLivro.removerLivro(livro)}" />
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>
